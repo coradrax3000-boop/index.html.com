@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aula Abierta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6e7d0;--g1:#f2c58a;--g2:#f0b48f;--card:#fffaf0;--tx:#3b2418;--mu:#7a5a45;--ac:#b5481b;--ac2:#f9dfc0;--bd:#e3c8a3;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1f130d;--g1:#5a2e14;--g2:#7a3a1a;--card:#2b1b12;--tx:#f5e6d3;--mu:#c4a07f;--ac:#f29a3f;--ac2:#46281a;--bd:#4a3020;color-scheme:dark}}
+html{scroll-behavior:smooth;scroll-padding-top:16px}
+body{margin:0;background:var(--bg) linear-gradient(180deg,var(--g1),transparent 420px) no-repeat;color:var(--tx);font:17px/1.7 'Nunito','Trebuchet MS',system-ui,sans-serif}
+header{text-align:center;padding:56px 20px 28px}
+header h1{font:600 clamp(2.4rem,7vw,3.8rem)/1.1 'Fredoka','Trebuchet MS',sans-serif;margin:0;color:var(--ac)}
+header p{color:var(--mu);margin:10px 0 0;font-style:italic}
+.leaves{font-size:2rem;letter-spacing:.4em;margin-bottom:6px}
+nav{max-width:760px;margin:0 auto 12px;padding:0 20px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center;font:14px system-ui,sans-serif}
+nav a{color:var(--tx);text-decoration:none;border:1px solid var(--bd);background:var(--card);padding:6px 12px;border-radius:99px}
+nav a:hover{border-color:var(--ac);color:var(--ac)}
+main{max-width:760px;margin:0 auto;padding:12px 20px 40px}
+article{background:var(--card);border:1px solid var(--bd);border-radius:16px;border-top:4px solid var(--ac);padding:28px clamp(18px,4vw,36px);margin:24px 0}
+.date{font:13px system-ui,sans-serif;color:var(--mu);text-transform:uppercase;letter-spacing:.06em}
+article h2{font:600 1.6rem/1.25 'Fredoka','Trebuchet MS',sans-serif;margin:6px 0 14px}
+article h3{font:500 1.1rem 'Fredoka','Trebuchet MS',sans-serif;color:var(--ac);margin:22px 0 4px}
+p{margin:.5em 0}ul{padding-left:1.2em}
+.tags{display:flex;flex-wrap:wrap;gap:8px;padding:0;list-style:none}
+.tags li{background:var(--ac2);color:var(--ac);font:14px system-ui,sans-serif;padding:5px 12px;border-radius:99px}
+.q{background:var(--ac2);border-left:4px solid var(--ac);padding:12px 16px;border-radius:8px;margin-top:22px}
+.q b{display:block;font:600 .8rem system-ui,sans-serif;text-transform:uppercase;letter-spacing:.06em;color:var(--ac)}
+.src{font:14px/1.5 system-ui,sans-serif;color:var(--mu);word-break:break-word}
+.src a{color:var(--ac)}
+footer{text-align:center;color:var(--mu);font:14px system-ui,sans-serif;padding:10px 20px 40px}
+nav,.date,.tags li,.src,footer,.q b{font-family:'Nunito','Trebuchet MS',sans-serif}
+#bar{position:fixed;top:env(safe-area-inset-top,0px);left:0;height:5px;width:0;background:linear-gradient(90deg,#f29a3f,#b5481b);z-index:20}
+article{transition:transform .25s,box-shadow .25s,opacity .6s;opacity:0;transform:translateY(24px)}
+article.in{opacity:1;transform:none}
+article.in:hover{transform:translateY(-4px) rotate(-.2deg);box-shadow:0 12px 28px rgba(120,60,20,.2)}
+.top{display:flex;gap:14px;align-items:center;margin-bottom:6px}
+.top h2{margin:4px 0 0}
+.ico{font-size:2.2rem;background:var(--ac2);border-radius:18px;width:62px;height:62px;display:grid;place-items:center;flex:none;transition:transform .3s}
+article:hover .ico{transform:rotate(12deg) scale(1.12)}
+.meta{font-size:13px;color:var(--mu)}
+details{border:2px dashed var(--bd);border-radius:14px;padding:2px 16px;margin:10px 0}
+details[open]{border-style:solid;background:var(--ac2)}
+summary{cursor:pointer;font:500 1.1rem 'Fredoka','Trebuchet MS',sans-serif;color:var(--ac);padding:10px 0;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"▸ ";display:inline-block;transition:transform .2s}
+details[open] summary::before{transform:rotate(90deg)}
+.tags li{cursor:pointer;user-select:none;transition:transform .15s,background .2s}
+.tags li:hover{transform:scale(1.07) rotate(-1deg)}
+.tags li.on{background:var(--ac);color:var(--card)}
+.tags li.on::before{content:"✓ "}
+.prog{height:9px;background:var(--ac2);border-radius:9px;overflow:hidden;margin:8px 0 12px}
+.prog i{display:block;height:100%;width:0;background:var(--ac);transition:width .4s}
+.react{display:flex;gap:8px;margin:12px 0 4px}
+.react button,.send{border:2px solid var(--bd);background:var(--card);color:var(--tx);border-radius:99px;padding:5px 14px;cursor:pointer;font:inherit;font-size:17px;transition:transform .15s}
+.react button:hover,.send:hover{transform:scale(1.1)}
+.react button.on{background:var(--ac);border-color:var(--ac)}
+textarea{width:100%;box-sizing:border-box;border:2px solid var(--bd);border-radius:12px;padding:10px;background:var(--card);color:var(--tx);font:inherit;min-height:64px;margin:8px 0}
+.send{background:var(--ac);color:var(--card);border-color:var(--ac);font-size:15px;font-weight:700}
+.cm{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:8px 12px;margin:8px 0;font-size:15px}
+.pic{margin:14px 0 8px;border-radius:16px;overflow:hidden;background:var(--ac2)}
+.pic svg{display:block;width:100%;height:auto}
+.pic{cursor:pointer}
+.pic svg *{transform-box:fill-box;transform-origin:center}
+.pic.off svg *{animation-play-state:paused!important}
+@keyframes bob{50%{translate:0 -8px}}
+@keyframes sway{from{rotate:-7deg}to{rotate:7deg}}
+@keyframes pulse{50%{scale:1.12}}
+@keyframes beat{0%,60%,100%{scale:1}15%{scale:1.25}35%{scale:1.1}}
+@keyframes fall{0%,100%{translate:0 -8px;rotate:0deg}50%{translate:16px 10px;rotate:50deg}}
+@keyframes blink{50%{opacity:.3}}
+@keyframes draw{0%{stroke-dashoffset:120}40%,100%{stroke-dashoffset:0}}
+@keyframes write{to{translate:-8px 5px;rotate:-6deg}}
+@keyframes toss{0%,100%{translate:0 0;rotate:0deg}40%{translate:0 -16px;rotate:-8deg}}
+@keyframes drift{to{translate:6px 0}}
+.pic path[d^="M0 0q14"]{animation:fall 4.5s ease-in-out infinite}
+.pic path[d^="M0 0q14"]:nth-of-type(2n){animation-delay:-2s;animation-duration:5.5s}
+#e0 .pic circle{animation:pulse 3s ease-in-out infinite}
+#e0 .pic ellipse{transform-origin:50% 100%;animation:sway 2.5s ease-in-out infinite alternate}
+#e1 .pic circle,#e1 .pic path[d^="M190 58"]{animation:pulse 2s ease-in-out infinite}
+#e1 .pic rect:last-of-type,#e1 .pic path[d^="M332"]{animation:bob 2.4s ease-in-out infinite}
+#e2 .pic path[d^="M200 6h"]{transform-origin:0 50%;animation:sway 1.4s ease-in-out infinite alternate}
+#e2 .pic rect[fill="#f2b04a"]{animation:blink 3s ease-in-out infinite}
+#e2 .pic rect[fill="#f2b04a"]:last-of-type{animation-delay:-1.5s}
+#e2 .pic circle{transform-origin:50% 100%;animation:sway 3s ease-in-out infinite alternate}
+#e3 .pic path[d^="M168 80"]{animation:pulse 3s ease-in-out infinite}
+#e3 .pic path[d^="M200 104"]{animation:beat 1.6s ease-in-out infinite}
+#e3 .pic circle:nth-of-type(n+2),#e3 .pic text{animation:bob 2s ease-in-out infinite}
+#e3 .pic circle:nth-of-type(3){animation-delay:-.7s}
+#e3 .pic text{animation-delay:-1.2s}
+#e4 .pic g[fill="none"] path{stroke-dasharray:120;animation:draw 4s ease-in-out infinite}
+#e4 .pic path[d^="M300 130"]{animation:write 1s ease-in-out infinite alternate}
+#e4 .pic rect[fill="none"]{animation:blink 2s ease-in-out infinite}
+#e5 .pic circle,#e5 .pic path:nth-of-type(n+2):nth-of-type(-n+6){animation:bob 2s ease-in-out infinite}
+#e5 .pic circle:nth-of-type(2),#e5 .pic path:nth-of-type(3){animation-delay:-.4s}
+#e5 .pic circle:nth-of-type(3),#e5 .pic path:nth-of-type(4){animation-delay:-.8s}
+#e5 .pic circle:nth-of-type(4),#e5 .pic path:nth-of-type(5){animation-delay:-1.2s}
+#e5 .pic circle:nth-of-type(5),#e5 .pic path:nth-of-type(6){animation-delay:-1.6s}
+#e5 .pic path[d^="M200 56"]{animation:beat 1.6s ease-in-out infinite}
+#e6 .pic circle{animation:pulse 2s ease-in-out infinite}
+#e6 .pic rect:nth-of-type(n+2),#e6 .pic text{animation:bob 2.4s ease-in-out infinite}
+#e6 .pic rect:nth-of-type(3),#e6 .pic text:nth-of-type(2){animation-delay:-.8s}
+#e6 .pic rect:nth-of-type(4),#e6 .pic text:nth-of-type(3){animation-delay:-1.6s}
+#e7 .pic circle:first-of-type{animation:pulse 4s ease-in-out infinite}
+#e7 .pic path[d^="M168 88"]{animation:drift 3s ease-in-out infinite alternate}
+#e7 .pic path[d^="M140 52"],#e7 .pic path[d^="M168 66"],#e7 .pic path[d^="M256 54"],#e7 .pic circle:nth-of-type(2){animation:toss 3s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){.pic svg *{animation:none!important}}
+#pres{max-width:760px;margin:20px auto;padding:0 20px}
+.deck{position:relative;min-height:420px;border-radius:20px;border:1px solid var(--bd);background:linear-gradient(135deg,var(--ac2),var(--card));overflow:hidden;box-shadow:0 8px 24px rgba(120,60,20,.12)}
+.sl{position:absolute;inset:0;padding:26px clamp(18px,5vw,40px);display:flex;flex-direction:column;justify-content:center;opacity:0;transform:translateX(40px);transition:.45s;pointer-events:none;overflow-y:auto}
+.sl.on{opacity:1;transform:none;pointer-events:auto}
+.sl.out{transform:translateX(-40px)}
+.sl h2{font:600 1.7rem 'Fredoka','Trebuchet MS',sans-serif;color:var(--ac);margin:0 0 14px}
+.sl:first-child{text-align:center;align-items:center}
+.sl:first-child h2{font-size:clamp(2.2rem,7vw,3.2rem);margin:0}
+.big{font-size:3.4rem;animation:bob 2.5s ease-in-out infinite}
+.rows div{padding:8px 0;border-bottom:1px dashed var(--bd)}
+.rows b{display:block;font:500 .8rem 'Fredoka','Trebuchet MS',sans-serif;text-transform:uppercase;letter-spacing:.07em;color:var(--mu)}
+.team{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.team li{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:8px 12px;transition:transform .2s}
+.team li:hover{transform:translateX(6px)}
+.team span{width:34px;height:34px;border-radius:50%;background:var(--ac);color:var(--card);display:grid;place-items:center;font:600 1rem 'Fredoka',sans-serif;flex:none}
+.tags2{display:flex;flex-wrap:wrap;gap:8px}
+.tags2 a{color:var(--tx);text-decoration:none;border:1px solid var(--bd);background:var(--card);padding:6px 12px;border-radius:99px;font-size:14px;transition:transform .15s}
+.tags2 a:hover{border-color:var(--ac);transform:scale(1.05)}
+.ctl{display:flex;justify-content:center;align-items:center;gap:14px;margin-top:12px}
+.ctl button{width:40px;height:40px;border-radius:50%;border:2px solid var(--bd);background:var(--card);color:var(--ac);font-size:18px;cursor:pointer}
+#dots i{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--bd);margin:0 4px;cursor:pointer;transition:.2s}
+#dots i.on{background:var(--ac);transform:scale(1.3)}
+#bg{position:fixed;inset:0;z-index:-2;background:linear-gradient(120deg,var(--g1),var(--bg),var(--g2),var(--bg),var(--g1));background-size:400% 400%;animation:shift 12s ease infinite}
+#cv{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+@keyframes shift{0%,100%{background-position:0 50%}50%{background-position:100% 50%}}
+article{background:color-mix(in srgb,var(--card) 88%,transparent);backdrop-filter:blur(6px)}
+@media (prefers-reduced-motion:reduce){#bg{animation:none}#cv{display:none}}
+#intro{position:fixed;inset:0;z-index:100;display:grid;place-items:center;text-align:center;background:radial-gradient(circle at 50% 40%,var(--g2),var(--bg));transition:opacity .8s,transform .8s;cursor:pointer}
+#intro.gone{opacity:0;transform:scale(1.15);pointer-events:none}
+#intro .lf{font-size:4.8rem;display:inline-block;animation:spinin 1.4s ease-out both}
+#intro h1{font:600 clamp(2.4rem,9vw,4rem) 'Fredoka','Trebuchet MS',sans-serif;color:var(--ac);margin:8px 0;animation:rise 1s .5s both}
+#intro p{color:var(--tx);margin:0;animation:rise 1s .9s both}
+#intro small{color:var(--mu);display:block;margin-top:18px;animation:rise 1s 1.4s both,blink 1.6s 2.4s infinite}
+@keyframes spinin{from{rotate:-360deg;scale:0;opacity:0}to{rotate:0deg;scale:1;opacity:1}}
+@keyframes rise{from{translate:0 30px;opacity:0}to{translate:0 0;opacity:1}}
+#bye{max-width:760px;margin:30px auto 10px;padding:0 20px;text-align:center}
+.byec{background:linear-gradient(135deg,var(--ac2),var(--card));border:1px solid var(--bd);border-top:4px solid var(--ac);border-radius:20px;padding:34px clamp(18px,5vw,40px);opacity:0;scale:.85;transition:opacity .8s,scale .8s cubic-bezier(.2,1.5,.4,1)}
+#bye.show .byec{opacity:1;scale:1}
+.hearts{font-size:2.4rem;letter-spacing:.3em;animation:bob 2s ease-in-out infinite}
+.byec h2{font:600 clamp(1.8rem,6vw,2.6rem) 'Fredoka','Trebuchet MS',sans-serif;color:var(--ac);margin:10px 0;animation:pulse 3s ease-in-out infinite}
+.sig{font-weight:700}
+.names{font:500 1rem 'Fredoka','Trebuchet MS',sans-serif;color:var(--mu);margin:10px 0 18px}
+#again{border:2px solid var(--ac);background:var(--ac);color:var(--card);border-radius:99px;padding:8px 20px;font:700 16px 'Nunito',sans-serif;cursor:pointer;transition:transform .15s}
+#again:hover{transform:scale(1.1) rotate(-2deg)}
+@media (prefers-reduced-motion:reduce){#intro{display:none}.byec{opacity:1;scale:1}}
+#th{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));right:12px;z-index:30;display:flex;gap:4px;background:var(--card);border:1px solid var(--bd);border-radius:99px;padding:4px}
+#th button{border:0;background:none;font-size:18px;border-radius:50%;width:32px;height:32px;cursor:pointer;transition:transform .15s}
+#th button:hover{transform:scale(1.2)}#th button.on{background:var(--ac2)}
+:root[data-t="spring"]{--bg:#eef7e8;--g1:#bfe6b0;--g2:#f6c6d8;--card:#fbfff8;--tx:#27402b;--mu:#587a5d;--ac:#b0306a;--ac2:#fbe0ec;--bd:#cfe3c4;color-scheme:light}
+:root[data-t="night"]{--bg:#12121f;--g1:#2a2250;--g2:#143a52;--card:#1c1b30;--tx:#e8e6ff;--mu:#a5a3c9;--ac:#8ab4ff;--ac2:#262650;--bd:#35335e;color-scheme:dark}
+#bd{position:fixed;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:30;border:2px solid var(--ac);background:var(--card);color:var(--tx);border-radius:99px;padding:6px 14px;font:700 15px 'Nunito',sans-serif;cursor:pointer}
+#bp{position:fixed;right:12px;bottom:calc(60px + env(safe-area-inset-bottom,0px));z-index:30;width:min(290px,calc(100vw - 24px));max-height:60vh;overflow:auto;background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:12px;box-shadow:0 10px 30px rgba(0,0,0,.25);display:none;font-size:15px}
+#bp.on{display:block}
+.bi{display:flex;gap:10px;align-items:center;padding:6px 0;font-size:14px}
+.bi i{font-style:normal;font-size:1.6rem;filter:grayscale(1);opacity:.4}
+.bi.got i{filter:none;opacity:1}
+.bi small{display:block;color:var(--mu)}
+#toast{position:fixed;left:50%;top:-80px;translate:-50% 0;z-index:90;background:var(--ac);color:var(--card);padding:10px 18px;border-radius:99px;font-weight:700;transition:top .5s cubic-bezier(.2,1.5,.4,1);white-space:nowrap}
+#toast.on{top:calc(16px + env(safe-area-inset-top,0px))}
+#tip{position:fixed;z-index:95;max-width:250px;background:var(--tx);color:var(--bg);padding:8px 12px;border-radius:10px;font-size:14px;line-height:1.4;opacity:0;pointer-events:none;transition:opacity .15s,scale .15s;scale:.9}
+#tip.on{opacity:1;scale:1}
+.gl{border-bottom:2px dotted var(--ac);color:var(--ac);cursor:help;font-weight:700}
+.qz{margin-top:8px}
+.qq{margin:10px 0;padding:12px;border:1px dashed var(--bd);border-radius:12px}
+.qq p{margin:0 0 8px;font-weight:700}
+.op button{display:block;width:100%;text-align:left;margin:6px 0;padding:8px 12px;border:2px solid var(--bd);background:var(--card);color:var(--tx);border-radius:12px;font:inherit;font-size:15px;cursor:pointer;transition:transform .15s}
+.op button:hover:not(:disabled){border-color:var(--ac);transform:translateX(4px)}
+.op button:disabled{cursor:default}
+.op button.ok{background:#4f8a3b;border-color:#4f8a3b;color:#fff;animation:pulse .5s}
+.op button.no{background:#c0392b;border-color:#c0392b;color:#fff;animation:shake .4s}
+@keyframes shake{25%{translate:-6px 0}75%{translate:6px 0}}
+.fb{font-size:14px;margin-top:4px}
+.sc{font:500 1.1rem 'Fredoka','Trebuchet MS',sans-serif;color:var(--ac)}
+.tl{position:relative;margin:10px 0 4px 14px;padding-left:22px;border-left:3px solid var(--bd)}
+.tl::before{content:"";position:absolute;left:-3px;top:0;width:3px;height:0;background:var(--ac);transition:height 1.6s ease}
+.tl.in::before{height:100%}
+.tl>div{position:relative;margin:0 0 14px;opacity:0;translate:-20px 0;transition:.6s}
+.tl.in>div{opacity:1;translate:0 0}
+.tl>div:nth-child(2){transition-delay:.6s}.tl>div:nth-child(3){transition-delay:1.1s}
+.tl>div::before{content:"";position:absolute;left:-31px;top:6px;width:16px;height:16px;border-radius:50%;background:var(--ac);border:3px solid var(--card);animation:pulse 2s ease-in-out infinite}
+.tl b{font:500 1.1rem 'Fredoka','Trebuchet MS',sans-serif;color:var(--ac)}
+.tl small{color:var(--mu);display:block}.tl p{margin:2px 0}
+#map{max-width:760px;margin:24px auto;padding:0 20px}
+.mapc{background:color-mix(in srgb,var(--card) 88%,transparent);backdrop-filter:blur(6px);border:1px solid var(--bd);border-top:4px solid var(--ac);border-radius:20px;padding:24px clamp(12px,4vw,30px)}
+.mapc h2{font:600 1.6rem 'Fredoka','Trebuchet MS',sans-serif;color:var(--ac);margin:0 0 4px}
+.mapc p{margin:0 0 10px}
+.mapc svg{width:100%;height:auto;display:block;overflow:visible}
+.ed{stroke:var(--bd);stroke-width:3;transition:stroke .3s,opacity .3s}
+.ed.hl{stroke:var(--ac);stroke-width:4;stroke-dasharray:9 7;animation:flow .8s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-16}}
+@keyframes popin{from{scale:0;opacity:0}}
+.nd{transform-box:fill-box;transform-origin:center;cursor:pointer;transition:scale .2s,opacity .3s;outline:none}
+.mapc.in .nd{animation:popin .6s backwards,bob 3s ease-in-out infinite}
+.nd circle{fill:var(--card);stroke:var(--ac);stroke-width:3;transition:fill .3s}
+.nd:hover,.nd:focus-visible{scale:1.12}
+.nd.on circle{fill:var(--ac2);stroke-width:6}
+.mapc.sa .nd:not(.on):not(.rel){opacity:.3}
+.mapc.sa .ed:not(.hl){opacity:.2}
+.nd .em{font-size:26px}.nd .lb{font:600 13px 'Nunito',sans-serif;fill:var(--tx)}
+#mi{margin-top:12px;padding:12px 16px;background:var(--ac2);border-radius:14px;font-size:15px}
+#mi h3{font:500 1.15rem 'Fredoka','Trebuchet MS',sans-serif;color:var(--ac);margin:0 0 4px}
+#mi ul{list-style:none;padding:0;margin:6px 0 10px}#mi li{margin:6px 0;font-size:14px}
+.chip{border:1px solid var(--ac);background:var(--card);color:var(--ac);border-radius:99px;padding:2px 10px;font:700 13px 'Nunito',sans-serif;cursor:pointer;margin-right:6px}
+#owl{position:fixed;left:10px;bottom:calc(10px + env(safe-area-inset-bottom,0px));z-index:30;width:72px;cursor:pointer}
+#owl.hop{animation:hop .5s ease-out}
+@keyframes hop{40%{translate:0 -18px}}
+#owl svg{display:block;animation:bob 3s ease-in-out infinite}
+#owl svg *{transform-box:fill-box;transform-origin:center}
+#owl .pp{transition:translate .15s}
+#owl .lid{transform-origin:50% 0;animation:lid 4s infinite}
+#owl .wl{transform-origin:100% 20%;animation:fl 2.4s ease-in-out infinite}
+#owl .wr{transform-origin:0 20%;animation:fr 2.4s ease-in-out infinite}
+@keyframes lid{0%,92%,100%{scale:1 0}95%{scale:1 1}}
+@keyframes fl{50%{rotate:-14deg}}@keyframes fr{50%{rotate:14deg}}
+#ob{position:absolute;left:62px;bottom:64px;width:max-content;max-width:min(220px,calc(100vw - 100px));background:var(--card);color:var(--tx);border:2px solid var(--ac);border-radius:14px;padding:8px 12px;font-size:14px;line-height:1.35;opacity:0;scale:.8;transform-origin:0 100%;transition:.25s;pointer-events:none}
+#ob.on{opacity:1;scale:1}
+@media (prefers-reduced-motion:reduce){#owl svg,#owl svg *,.mapc .nd{animation:none!important}}
+#fm{position:fixed;top:calc(52px + env(safe-area-inset-top,0px));right:12px;z-index:30;border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:99px;padding:5px 12px;font:700 13px 'Nunito',sans-serif;cursor:pointer}
+#fm.on{background:var(--ac);border-color:var(--ac);color:var(--card)}
+:root[data-f] *,:root[data-f] *::before,:root[data-f] *::after{animation:none!important}
+:root[data-f] #cv,:root[data-f] #owl,:root[data-f] #intro{display:none}
+:root[data-f] #bg{background:var(--bg)}
+:root[data-f] article{background:var(--card);backdrop-filter:none;opacity:1;translate:none;transform:none}
+:root[data-f] body{font-size:18px;line-height:1.8}
+</style>
+</head>
+<body>
+<div id="bg"></div><div id="th"><button data-t="" title="Otoño">🍁</button><button data-t="spring" title="Primavera">🌸</button><button data-t="night" title="Nocturno">🌙</button></div><button id="bd"></button><div id="bp"></div><div id="toast"></div><div id="tip"></div><canvas id="cv"></canvas><div id="intro"><div><span class="lf">🍁</span><h1>Aula Abierta</h1><p>Te damos la bienvenida a nuestro blog</p><small>Toca para entrar</small></div></div><div id="bar"></div><header><div class="leaves">🍂🍁🍂</div><h1>Aula Abierta</h1><p>Mi aprendizaje y reflexión como futuro profesional de la educación</p></header>
+<nav id="nav"><a href="#pres">⭐ Presentación</a></nav>
+<section id="pres"><div class="deck">
+<div class="sl on"><div class="big">🍁</div><h2>Aula Abierta</h2><p>Blog de aprendizajes y reflexiones<br>como futuros profesionales de la educación</p><small>Presentación del equipo</small></div>
+<div class="sl"><h2>🎓 Nuestra institución</h2><div class="rows"><div><b>Universidad</b>Universidad Valle del Grijalva</div><div><b>Carrera</b>Licenciatura en Ciencias de la Educación con Terminación en Psicología Educativa</div><div><b>Cuatrimestre</b>Séptimo cuatrimestre</div><div><b>Grupo</b>“B”</div></div></div>
+<div class="sl"><h2>👥 Integrantes del equipo</h2><ul class="team"><li><span>D</span>Doris Adela Ortiz Hernández</li><li><span>E</span>Edwin Israel Pérez Meneses</li><li><span>B</span>Barbara Guadalupe Rico Trinidad</li><li><span>C</span>Corazón de Jesús Rodríguez Pérez</li><li><span>J</span>Julissa Zepeda Nigenda</li></ul></div>
+<div class="sl"><h2>🗂️ Lo que encontrarás</h2><div id="idx" class="tags2"></div></div>
+</div><div class="ctl"><button id="pv" aria-label="Anterior">←</button><span id="dots"></span><button id="nx" aria-label="Siguiente">→</button></div></section>
+<main id="posts"></main>
+<section id="bye"><div class="byec"><div class="hearts">💛🍂🧡🍁💛</div><h2>¡Gracias por leernos!</h2><p>Gracias por dedicar un momento de tu tiempo a recorrer nuestro blog. Cada entrada es parte de nuestro aprendizaje, y saber que alguien la leyó la hace más valiosa. Esperamos que estas reflexiones te hayan inspirado tanto como a nosotros.</p><p class="sig">Con cariño,<br>el equipo de Aula Abierta</p><div class="names">Doris · Edwin · Barbara · Corazón · Julissa</div><button id="again">🔝 Volver al inicio</button></div></section>
+<footer>🍁 Aula Abierta · Octubre 2026 🍂</footer>
+<script>
+const P=[
+{t:"Mi aprendizaje y reflexión como futuro profesional de la educación",d:"13 de octubre de 2026",
+s:[["Introducción","A lo largo de mi formación académica he tenido la oportunidad de conocer temas, desarrollar actividades y elaborar evidencias que contribuyen a mi aprendizaje. Cada trabajo representa una oportunidad para comprender mejor los contenidos y reconocer las habilidades que puedo seguir fortaleciendo."],
+["Lo que he aprendido","Los conocimientos adquiridos me han permitido reflexionar sobre la importancia de comprender las necesidades de los estudiantes, planear actividades con objetivos claros, promover la inclusión y utilizar recursos que favorezcan el aprendizaje.","También he reconocido la importancia de investigar, organizar información, expresar mis ideas y analizar diferentes situaciones antes de proponer soluciones."],
+["Nota reflexiva final","Considero que mi formación profesional es un proceso continuo en el que no solamente debo adquirir conocimientos, sino también aprender a aplicarlos de manera responsable. La elaboración de este blog me permite reunir mis evidencias, reconocer mis avances e identificar los aspectos que necesito mejorar.","Como futura profesional de la educación, quiero seguir desarrollando habilidades que me permitan contribuir a una educación respetuosa, inclusiva y centrada en las necesidades de los estudiantes. También considero importante mantener una actitud abierta al aprendizaje y a las opiniones de otras personas."]],
+c:["Pensamiento crítico y reflexivo","Comunicación escrita","Organización de evidencias","Uso de herramientas digitales","Reconocimiento de fortalezas y áreas de mejora"],
+q:"¿Qué competencia consideran más importante para quienes se están formando como profesionales de la educación y por qué?"},
+{t:"La tecnología como herramienta para aprender",d:"13 de octubre de 2026",
+s:[["Introducción","La tecnología se ha convertido en una herramienta importante para apoyar los procesos educativos. Mediante plataformas digitales, videos, presentaciones, juegos educativos y actividades interactivas, es posible presentar información de diferentes maneras y ofrecer oportunidades para practicar lo aprendido."],
+["Beneficios y desafíos de la tecnología educativa","Los recursos digitales pueden facilitar el acceso a información, fomentar la creatividad y permitir que los estudiantes reciban retroalimentación sobre sus actividades. Sin embargo, su utilización debe tener un propósito pedagógico y considerar las condiciones de acceso de cada estudiante.","Es importante seleccionar herramientas que sean accesibles, comprensibles y adecuadas para los objetivos de aprendizaje, así como promover un uso responsable de la información."],
+["Nota reflexiva","Considero que la tecnología puede hacer que las actividades educativas sean más dinámicas e interesantes, siempre que se utilice de manera adecuada. Aprendí que no se trata solamente de incorporar computadoras o aplicaciones, sino de diseñar actividades que realmente ayuden a comprender los contenidos y permitan al estudiante participar activamente."]],
+c:["Uso de herramientas digitales","Búsqueda y selección de información","Creatividad en el diseño de actividades","Comunicación y aprendizaje autónomo"],
+q:"¿Qué herramienta digital les ha ayudado más a aprender y qué ventajas encuentran en ella?"},
+{t:"Gestión escolar y liderazgo educativo",d:"13 de octubre de 2026",
+s:[["Introducción","La gestión escolar comprende las acciones que permiten organizar y coordinar el funcionamiento de una institución educativa. Incluye la planeación de actividades, la distribución de responsabilidades, la administración de recursos y la colaboración entre los integrantes de la comunidad escolar."],
+["La importancia del liderazgo educativo","El liderazgo educativo contribuye a establecer objetivos compartidos y promover la participación de docentes, estudiantes y familias. Una buena gestión requiere comunicación, organización, seguimiento de las actividades y disposición para resolver los problemas que se presentan.","Además, el diagnóstico de las necesidades de una escuela ayuda a identificar sus fortalezas y áreas de oportunidad para establecer acciones de mejora."],
+["Nota reflexiva","A través de este tema comprendí que el funcionamiento de una escuela no depende únicamente del trabajo del director o de los docentes, sino de la colaboración entre sus integrantes. Considero que la comunicación y la organización son fundamentales para alcanzar objetivos comunes y mejorar las condiciones de aprendizaje."]],
+c:["Organización y planeación","Trabajo en equipo","Resolución de problemas","Análisis de situaciones institucionales"],
+q:"¿Qué características consideran que debe tener un buen líder educativo para mejorar una institución escolar?"},
+{t:"El papel de la psicología educativa en la escuela",d:"13 de octubre de 2026",
+s:[["Introducción","La psicología educativa estudia los procesos psicológicos relacionados con la enseñanza y el aprendizaje. Sus aportaciones permiten comprender cómo influyen el desarrollo, la motivación, las emociones y el contexto social en la experiencia escolar de los estudiantes."],
+["¿Cómo contribuye la psicología educativa?","La psicología educativa ayuda a identificar factores que pueden favorecer o dificultar el aprendizaje. También aporta conocimientos para comprender las diferencias individuales, orientar estrategias de apoyo y colaborar con docentes y familias.","Por ejemplo, cuando un estudiante presenta dificultades para comprender un contenido, es importante analizar diferentes factores antes de sacar conclusiones. Se pueden revisar las estrategias de enseñanza, los conocimientos previos, las condiciones del aula y los apoyos disponibles."],
+["Nota reflexiva","Este tema me parece importante para mi formación porque me permite comprender que las dificultades escolares pueden tener diferentes causas. Considero que es necesario escuchar a los estudiantes, observar sus necesidades y evitar juzgarlos únicamente por sus calificaciones o comportamientos. También reconozco la importancia de trabajar de manera responsable y colaborar con otros profesionales cuando una situación lo requiere."]],
+c:["Observación y análisis","Comprensión del comportamiento en contextos educativos","Identificación de necesidades de aprendizaje","Comunicación y colaboración profesional"],
+q:"¿Por qué consideran importante tomar en cuenta las emociones y el contexto de los estudiantes durante el aprendizaje?"},
+{t:"La planeación didáctica y las estrategias de enseñanza",d:"13 de octubre de 2026",
+s:[["Introducción","La planeación didáctica es una herramienta que permite organizar el proceso de enseñanza y aprendizaje. Mediante ella, el docente establece los objetivos que desea alcanzar, selecciona las actividades que realizará, identifica los materiales que necesita y determina cómo evaluará los aprendizajes de los estudiantes."],
+["Elementos de la planeación didáctica","Una planeación puede incluir los siguientes elementos:",["<b>Objetivos:</b> indican lo que se espera que aprendan los estudiantes.","<b>Contenidos:</b> establecen los conocimientos y habilidades que se trabajarán.","<b>Actividades:</b> describen las acciones que realizarán el docente y los alumnos.","<b>Recursos:</b> incluyen materiales impresos, digitales y otros apoyos.","<b>Evaluación:</b> permite identificar los avances y los aspectos que necesitan reforzarse."],"Una buena planeación debe ser flexible para realizar ajustes de acuerdo con las necesidades del grupo y los resultados obtenidos."],
+["Nota reflexiva","Considero que la planeación es importante porque ayuda al docente a trabajar de manera organizada y a aprovechar mejor el tiempo. También comprendí que no basta con preparar actividades, sino que estas deben tener un propósito y contribuir al aprendizaje. Como futura profesional de la educación, necesito aprender a diseñar propuestas que sean claras, interesantes y adecuadas para los estudiantes."]],
+c:["Organización y planificación","Diseño de actividades educativas","Selección de recursos didácticos","Evaluación del aprendizaje"],
+q:"¿Qué consideran más importante al momento de diseñar una planeación didáctica?"},
+{t:"Educación especial e inclusión educativa",d:"13 de octubre de 2026",
+s:[["Introducción","La inclusión educativa busca que todos los estudiantes tengan oportunidades de participar y aprender, tomando en cuenta sus características, capacidades y necesidades. Esto implica reconocer la diversidad que existe dentro del aula y trabajar para eliminar las barreras que dificultan el aprendizaje y la participación."],
+["La importancia de una escuela inclusiva","Una escuela inclusiva promueve el respeto, la igualdad de oportunidades y la participación de todos sus integrantes. Para lograrlo, es importante adaptar las estrategias de enseñanza, utilizar diferentes recursos y ofrecer apoyos cuando sean necesarios.","También es fundamental la colaboración entre docentes, familias, directivos y profesionales de apoyo, ya que el trabajo conjunto permite identificar necesidades y buscar alternativas para responder a ellas."],
+["Nota reflexiva","Este tema me hace reflexionar sobre la importancia de no tratar a todos los estudiantes exactamente de la misma manera, sino de brindarles los apoyos que necesitan para aprender y participar. Considero que, como futura profesional de la educación, debo desarrollar una actitud empática, reconocer las diferencias individuales y contribuir a crear ambientes escolares donde todos se sientan respetados."]],
+c:["Empatía y respeto por la diversidad","Identificación de barreras para el aprendizaje","Diseño de estrategias inclusivas","Trabajo colaborativo"],
+q:"¿Qué acciones podemos realizar dentro de una escuela para favorecer la inclusión educativa?"},
+{t:"Teorías psicológicas del aprendizaje",d:"12 de octubre de 2026",
+s:[["Introducción","Las teorías psicológicas del aprendizaje permiten comprender cómo las personas adquieren conocimientos, desarrollan habilidades y modifican su comportamiento a partir de sus experiencias. Estas teorías ofrecen diferentes explicaciones sobre los procesos que intervienen en el aprendizaje y ayudan a los docentes a seleccionar estrategias de enseñanza adecuadas."],
+["Principales teorías del aprendizaje","<b>Jean Piaget:</b> explicó cómo los niños construyen sus conocimientos mediante la interacción con el entorno y cómo su pensamiento cambia a lo largo del desarrollo.","<b>Lev Vygotsky:</b> destacó la importancia de la interacción social, el lenguaje y la ayuda de otras personas en el aprendizaje.","<b>B. F. Skinner:</b> estudió el condicionamiento operante y la manera en que las consecuencias de una conducta pueden influir en su frecuencia.","Aunque cada teoría explica el aprendizaje desde una perspectiva diferente, todas pueden aportar elementos para comprender las necesidades de los estudiantes."],
+["Notas reflexivas","Al conocer estas teorías, comprendo que los estudiantes no aprenden de una sola manera. Cada uno tiene experiencias, conocimientos y necesidades diferentes. Por eso considero importante que los docentes utilicen distintas estrategias, promuevan la participación y tomen en cuenta el desarrollo de sus alumnos."]],
+c:["Identificación de conceptos psicológicos","Comparación de teorías","Análisis de situaciones educativas","Aplicación de conocimientos teóricos"],
+q:"¿Qué teoría del aprendizaje consideran más útil para comprender cómo aprenden los estudiantes y por qué?",
+f:["Rodríguez, M. A. M. (1999, 1 noviembre). <i>El enfoque sociocultural en el estudio del desarrollo y la educación</i>. https://redie.uabc.mx/redie/article/view/6","Velandia, N. A., & Romero, R. F. (2011). Aporte de la obra de Piaget a la comprensión de problemas educativos: su posible explicación del aprendizaje. <i>Revista Colombiana de Educación, 60</i>, 93. https://doi.org/10.17227/01203916.843"]},
+{t:"La importancia de la educación en la sociedad",d:"12 de octubre de 2026",
+s:[["Introducción","La educación es una parte fundamental de la sociedad, ya que permite que las personas adquieran conocimientos, desarrollen habilidades y aprendan valores que les ayudan a desenvolverse en diferentes situaciones de la vida. A través de la educación, los individuos pueden desarrollar su pensamiento crítico, aprender a convivir con otras personas y participar en la construcción de una sociedad más justa."],
+["¿Por qué es importante la educación?","La educación no consiste únicamente en aprender contenidos escolares, sino también en desarrollar capacidades personales y sociales. La escuela es un espacio donde los estudiantes pueden compartir experiencias, expresar sus ideas, aprender a respetar las diferencias y desarrollar habilidades para resolver problemas.","Además, la educación contribuye al desarrollo de las comunidades, porque brinda oportunidades para mejorar las condiciones de vida y participar de manera responsable en la sociedad."],
+["Nota reflexiva","Considero que la educación es importante porque nos permite crecer tanto personal como profesionalmente. A través de ella podemos adquirir conocimientos que nos ayudan a comprender mejor nuestro entorno y tomar decisiones. También pienso que los docentes tienen una gran responsabilidad, porque no solamente transmiten información, sino que pueden influir positivamente en la formación de sus estudiantes."]],
+c:["Comprensión y análisis de la importancia de la educación","Pensamiento crítico","Comunicación escrita","Reflexión sobre la función social de la escuela"],
+q:"¿De qué manera consideran que la educación puede contribuir a mejorar nuestra sociedad?",
+f:["Cetys, W. (2021, 24 septiembre). <i>Importancia de la educación: el camino para una mejor sociedad</i>. CETYS Trends. https://www.cetys.mx/trends/educacion/importancia-de-la-educacion-el-camino-para-una-mejor-sociedad/","Bosco, C. U. D. (2025, 31 octubre). <i>La importancia de la educación en el siglo XXI como herramienta de transformación y progreso en la sociedad</i>. Centro Universitario Don Bosco. https://cesdonbosco.com/la-importancia-de-la-educacion-en-el-siglo-xxi/","Montaño, E. (2025, 22 febrero). <i>La importancia de la educación en el desarrollo de una sociedad</i>. Niños En Alegría. https://www.ninosenalegria.org.mx/la-importancia-de-la-educacion-en-el-desarrollo-de-una-sociedad/"]}
+];
+const IC=['🌱','💻','🏫','🧠','📝','🤝','📚','🌎'];
+const W=(l,s)=>`<svg viewBox="0 0 400 160" role="img" aria-label="${l}">${s}</svg>`;
+const lf=(x,y,c)=>`<path transform="translate(${x} ${y})" d="M0 0q14-14 28 0q-14 14-28 0z" fill="${c}"/>`;
+const K='var(--tx)',C='var(--card)',A='var(--ac)',O='#d9632b',Y='#f2b04a',G='#6f8f3a';
+const IMG=[
+W('Una planta que crece sobre un libro abierto',`<circle cx="330" cy="40" r="22" fill="${Y}"/><path d="M200 120C200 90 198 70 200 40" stroke="${G}" stroke-width="6" fill="none" stroke-linecap="round"/><ellipse cx="170" cy="62" rx="26" ry="12" transform="rotate(-30 170 62)" fill="#8fb04a"/><ellipse cx="232" cy="48" rx="28" ry="12" transform="rotate(30 232 48)" fill="${G}"/><ellipse cx="205" cy="30" rx="10" ry="16" fill="#a5c45a"/><path d="M110 130L200 142L290 130V112L200 124L110 112z" fill="${C}" stroke="${K}" stroke-width="3" stroke-linejoin="round"/><path d="M200 124v18" stroke="${K}" stroke-width="3"/>${lf(50,40,O)}${lf(320,110,Y)}${lf(90,100,A)}`),
+W('Una laptop con un video, una idea y un mensaje',`<rect x="110" y="24" width="180" height="104" rx="10" fill="${C}" stroke="${K}" stroke-width="4"/><rect x="122" y="36" width="156" height="80" rx="4" fill="${A}"/><path d="M190 58l30 18-30 18z" fill="${C}"/><path d="M90 132h220l-12 16H102z" fill="${K}"/><circle cx="64" cy="56" r="16" fill="${Y}"/><rect x="58" y="72" width="12" height="8" rx="2" fill="${K}"/><rect x="318" y="40" width="52" height="34" rx="10" fill="#8fb04a"/><path d="M332 74l-4 14 16-14z" fill="#8fb04a"/>${lf(330,110,O)}`),
+W('Una escuela con bandera y árboles de otoño',`<path d="M60 142h280" stroke="${K}" stroke-width="4" stroke-linecap="round"/><rect x="130" y="70" width="140" height="72" fill="${C}" stroke="${K}" stroke-width="4"/><path d="M118 72L200 28l82 44z" fill="${A}" stroke="${K}" stroke-width="4" stroke-linejoin="round"/><rect x="185" y="102" width="30" height="40" fill="${K}"/><rect x="146" y="88" width="24" height="22" fill="${Y}"/><rect x="230" y="88" width="24" height="22" fill="${Y}"/><path d="M200 28V6" stroke="${K}" stroke-width="3"/><path d="M200 6h22l-6 7 6 7h-22z" fill="${O}"/><rect x="320" y="104" width="8" height="38" fill="#7a4a2a"/><circle cx="324" cy="96" r="24" fill="${O}"/><rect x="76" y="108" width="8" height="34" fill="#7a4a2a"/><circle cx="80" cy="98" r="22" fill="${Y}"/>`),
+W('Una cabeza con cerebro y corazón que se hace preguntas',`<circle cx="200" cy="84" r="54" fill="${C}" stroke="${K}" stroke-width="4"/><path d="M168 80q-4-24 20-26q10-14 28-4q24 2 18 26q10 14-6 24q-6 16-24 10q-14 10-28-2q-18-6-8-28z" fill="${Y}" stroke="${K}" stroke-width="3"/><path d="M200 104l-16-16a9 9 0 0113-13l3 3 3-3a9 9 0 0113 13z" fill="${A}"/><circle cx="276" cy="40" r="7" fill="${K}"/><circle cx="296" cy="24" r="10" fill="${K}"/><text x="318" y="50" font-size="44" fill="${A}" font-family="Fredoka,sans-serif">?</text>${lf(60,50,O)}`),
+W('Un cuaderno con lista de pasos y un lápiz',`<rect x="130" y="12" width="140" height="136" rx="10" fill="${C}" stroke="${K}" stroke-width="4"/><g fill="none" stroke="${G}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M148 44l8 8 14-16M148 72l8 8 14-16M148 100l8 8 14-16"/></g><g stroke="var(--mu)" stroke-width="5" stroke-linecap="round"><path d="M186 44h66M186 72h66M186 100h66M186 128h66"/></g><rect x="148" y="116" width="20" height="20" rx="4" fill="none" stroke="${K}" stroke-width="3"/><path d="M300 130l50-60 14 12-50 60-18 6z" fill="${Y}" stroke="${K}" stroke-width="3" stroke-linejoin="round"/>${lf(60,100,O)}`),
+W('Cinco personas tomadas de la mano bajo un corazón',`<path d="M70 118H330" stroke="${K}" stroke-width="5"/>${[[70,O],[135,Y],[200,G],[265,'#8a4b2a'],[330,A]].map(([x,c])=>`<circle cx="${x}" cy="86" r="14" fill="${c}"/><path d="M${x-18} 142v-24a18 18 0 0136 0v24z" fill="${c}"/>`).join('')}<path d="M200 56l-16-16a9 9 0 0113-13l3 3 3-3a9 9 0 0113 13z" fill="${A}"/>`),
+W('Tres teorías del aprendizaje que dan origen a una idea',`<path d="M200 80L90 100M200 80V100M200 80L310 100" stroke="${K}" stroke-width="3"/><circle cx="200" cy="54" r="28" fill="${Y}" stroke="${K}" stroke-width="3"/><rect x="189" y="80" width="22" height="12" rx="3" fill="${K}"/>${[[90,'Piaget'],[200,'Vygotsky'],[310,'Skinner']].map(([x,t])=>`<rect x="${x-48}" y="100" width="96" height="34" rx="17" fill="${A}"/><text x="${x}" y="123" text-anchor="middle" font-size="16" font-weight="700" fill="${C}" font-family="Fredoka,sans-serif">${t}</text>`).join('')}${lf(40,40,O)}${lf(330,36,G)}`),
+W('Un globo terráqueo con birrete de graduación',`<circle cx="200" cy="104" r="46" fill="#7fb3c8" stroke="${K}" stroke-width="4"/><path d="M168 88q14-14 28-4q6 14-8 22q-14 6-20-18zM206 112q16-6 24 8q-4 20-20 16q-8-10-4-24z" fill="${G}"/><path d="M140 52L200 24l60 28-60 28z" fill="${K}"/><path d="M168 66v16q32 16 64 0V66l-32 14z" fill="${K}"/><path d="M256 54v28" stroke="${Y}" stroke-width="4"/><circle cx="256" cy="86" r="5" fill="${Y}"/>${lf(60,70,O)}${lf(310,110,Y)}${lf(90,120,A)}`)
+];
+const link=s=>s.replace(/(https?:\/\/[^\s]+)/g,'<a href="$1" target="_blank" rel="noopener">$1</a>');
+const nav=document.getElementById('nav'),box=document.getElementById('posts');
+P.forEach((p,n)=>{
+ nav.insertAdjacentHTML('beforeend',`<a href="#e${n}">${p.t.length>34?p.t.slice(0,32)+'…':p.t}</a>`);
+ const body=p.s.map(([h,...r],k)=>`<details${k<1?' open':''}><summary>${h}</summary>`+r.map(x=>Array.isArray(x)?`<ul>${x.map(l=>`<li>${l}</li>`).join('')}</ul>`:`<p>${x}</p>`).join('')+`</details>`).join('');
+ box.insertAdjacentHTML('beforeend',`<article id="e${n}"><div class="top"><div class="ico">${IC[n]}</div><div><div class="date">${p.d}</div><h2>${p.t}</h2><div class="meta">⏱ ${Math.max(1,Math.round(JSON.stringify(p.s).split(' ').length/180))} min de lectura</div></div></div><div class="pic">${IMG[n]}</div>${body}<h3>Competencias desarrolladas <small style="font-size:.75em;color:var(--mu)">(toca las que ya dominas)</small></h3><div class="prog"><i></i></div><ul class="tags">${p.c.map(x=>`<li>${x}</li>`).join('')}</ul><div class="q"><b>Pregunta para los lectores</b>${p.q}<div class="react">${['👍','💡','❤️'].map(e=>`<button data-e="${e}">${e}</button>`).join('')}</div><textarea placeholder="Escribe tu respuesta…"></textarea><button class="send">Comentar</button><div class="cms"></div></div>${p.f?`<h3>Fuentes consultadas</h3><ul class="src">${p.f.map(x=>`<li>${link(x)}</li>`).join('')}</ul>`:''}</article>`);
+});
+const S=(()=>{try{return JSON.parse(localStorage.getItem('aa')||'{}')}catch(e){return{}}})();
+const save=()=>{try{localStorage.setItem('aa',JSON.stringify(S))}catch(e){}};
+const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('in')),{threshold:.05});
+document.querySelectorAll('article').forEach((a,n)=>{
+ io.observe(a);a.querySelector('.pic').onclick=e=>e.currentTarget.classList.toggle('off');
+ const st=S[n]=Object.assign({r:[],c:[],m:[]},S[n]);
+ const tags=[...a.querySelectorAll('.tags li')],pr=a.querySelector('.prog i');
+ const uc=()=>{tags.forEach((t,i)=>t.classList.toggle('on',st.c.includes(i)));pr.style.width=st.c.length/tags.length*100+'%'};
+ tags.forEach((t,i)=>t.onclick=()=>{st.c=st.c.includes(i)?st.c.filter(x=>x!==i):[...st.c,i];uc();save()});
+ uc();
+ const rb=[...a.querySelectorAll('.react button')];
+ const ur=()=>rb.forEach(b=>b.classList.toggle('on',st.r.includes(b.dataset.e)));
+ rb.forEach(b=>b.onclick=()=>{const e=b.dataset.e;st.r=st.r.includes(e)?st.r.filter(x=>x!==e):[...st.r,e];ur();save()});
+ ur();
+ const cms=a.querySelector('.cms'),ta=a.querySelector('textarea');
+ const rc=()=>{cms.textContent='';st.m.forEach(m=>{const d=document.createElement('div');d.className='cm';d.textContent='💬 '+m;cms.appendChild(d)})};
+ a.querySelector('.send').onclick=()=>{const v=ta.value.trim();if(!v)return;st.m.push(v);ta.value='';rc();save()};
+ rc();
+});
+addEventListener('scroll',()=>{const h=document.documentElement;document.getElementById('bar').style.width=h.scrollTop/Math.max(1,h.scrollHeight-h.clientHeight)*100+'%'});
+const sl=[...document.querySelectorAll('.sl')],dots=document.getElementById('dots');let cur=0;
+document.getElementById('idx').innerHTML=P.map((p,n)=>`<a href="#e${n}">${IC[n]} ${p.t}</a>`).join('');
+sl.forEach((_,i)=>{const d=document.createElement('i');d.onclick=()=>go(i);dots.appendChild(d)});
+const go=i=>{cur=(i+sl.length)%sl.length;sl.forEach((s,k)=>{s.classList.toggle('on',k===cur);s.classList.toggle('out',k<cur)});[...dots.children].forEach((d,k)=>d.classList.toggle('on',k===cur))};
+document.getElementById('pv').onclick=()=>go(cur-1);document.getElementById('nx').onclick=()=>go(cur+1);
+let x0;const dk=document.querySelector('.deck');dk.ontouchstart=e=>x0=e.touches[0].clientX;dk.ontouchend=e=>{const d=e.changedTouches[0].clientX-x0;if(Math.abs(d)>50)go(cur+(d<0?1:-1))};
+go(0);
+(()=>{if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+const cv=document.getElementById('cv'),x=cv.getContext('2d'),m={x:-999,y:-999,vx:0},L=window.LV=[],cols=window.LC=['#d9632b','#f2b04a','#b5481b','#c2512f','#8a4b2a','#e8893a'];let w,h;
+const rs=()=>{w=cv.width=innerWidth;h=cv.height=innerHeight};rs();addEventListener('resize',rs);
+const mk=(X,Y,b)=>({x:X??Math.random()*w,y:Y??Math.random()*h,s:8+Math.random()*16,vx:b?(Math.random()-.5)*16:0,vy:b?(Math.random()-.9)*14:2,base:1.5+Math.random()*2.5,a:Math.random()*6.3,va:(Math.random()-.5)*.16,ph:Math.random()*6.3,c:cols[Math.random()*cols.length|0],b});
+for(let i=0;i<55;i++)L.push(mk());
+addEventListener('pointermove',e=>{m.vx=Math.abs(e.clientX-m.x)>200?0:e.clientX-m.x;m.x=e.clientX;m.y=e.clientY});
+addEventListener('pointerdown',e=>{for(let i=0;i<14;i++)L.push(mk(e.clientX,e.clientY,1));if(L.length>150)L.splice(55,L.length-150)});
+const draw=l=>{x.save();x.translate(l.x,l.y);x.rotate(l.a);x.scale(Math.cos(l.ph),1);x.fillStyle=l.c;x.beginPath();x.moveTo(0,-l.s);x.quadraticCurveTo(l.s*.9,-l.s*.2,0,l.s);x.quadraticCurveTo(-l.s*.9,-l.s*.2,0,-l.s);x.fill();x.strokeStyle='rgba(0,0,0,.25)';x.beginPath();x.moveTo(0,-l.s);x.lineTo(0,l.s);x.stroke();x.restore()};
+const tick=()=>{if(document.documentElement.hasAttribute('data-f')){requestAnimationFrame(tick);return}x.clearRect(0,0,w,h);for(let i=L.length-1;i>=0;i--){const l=L[i];l.ph+=.06;l.a+=l.va;
+ const dx=l.x-m.x,dy=l.y-m.y,d=Math.hypot(dx,dy)||1;if(d<140){const f=(140-d)/140;l.vx+=dx/d*f*2.2+m.vx*.06*f;l.vy+=dy/d*f*1.4}
+ l.vx*=.96;l.vy+=(l.base-l.vy)*.03;l.x+=l.vx+Math.sin(l.ph*.7+l.y/90)*1.8;l.y+=l.vy;
+ if(l.x<-30)l.x=w+30;if(l.x>w+30)l.x=-30;
+ if(l.y>h+30){if(l.b){L.splice(i,1);continue}l.y=-30;l.x=Math.random()*w;l.vx=0}
+ draw(l)}requestAnimationFrame(tick)};tick()})();
+const it=document.getElementById('intro'),hi=()=>{it.classList.add('gone');setTimeout(()=>it.remove(),900)};
+it.onclick=hi;setTimeout(hi,3400);
+nav.insertAdjacentHTML('beforeend','<a href="#bye">💌 Despedida</a>');
+const by=document.getElementById('bye');
+new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){by.classList.add('show');[.2,.5,.8].forEach((f,i)=>setTimeout(()=>dispatchEvent(new PointerEvent('pointerdown',{clientX:innerWidth*f,clientY:innerHeight*.5})),i*350));o.disconnect()}}),{threshold:.5}).observe(by);
+document.getElementById('again').onclick=()=>scrollTo({top:0,behavior:'smooth'});
+const SB=(()=>{try{return JSON.parse(localStorage.getItem('aa2')||'{}')}catch(e){return{}}})();SB.b=SB.b||[];SB.q=SB.q||{};
+const sv=()=>{try{localStorage.setItem('aa2',JSON.stringify(SB))}catch(e){}};
+const BD=[['cur','🔍','Explorador','Lee las 8 entradas'],['per','🧠','Mente brillante','Saca 2/2 en un quiz'],['allq','🎯','Quizzer','Contesta los 8 quizzes'],['com','🌟','Competente','Marca 8 competencias'],['voz','💬','Participativo','Deja un comentario'],['gl','📖','Curioso del glosario','Toca un término subrayado'],['fin','🍁','Lector completo','Llega a la despedida'],['tem','🎨','Estilista','Cambia el tema del blog']];
+const bx=()=>dispatchEvent(new PointerEvent('pointerdown',{clientX:innerWidth/2,clientY:innerHeight/3}));
+const bdn=document.getElementById('bd'),bp=document.getElementById('bp'),ts=document.getElementById('toast'),tp=document.getElementById('tip');
+const rb2=()=>{bdn.textContent=`🏅 ${SB.b.length}/${BD.length}`;bp.innerHTML='<b>Tus insignias</b>'+BD.map(([id,e,n,d])=>`<div class="bi${SB.b.includes(id)?' got':''}"><i>${e}</i><div>${n}<small>${d}</small></div></div>`).join('')};
+const aw=id=>{if(SB.b.includes(id))return;SB.b.push(id);sv();rb2();const b=BD.find(x=>x[0]===id);ts.textContent=`${b[1]} ¡Nueva insignia: ${b[2]}!`;ts.classList.add('on');setTimeout(()=>ts.classList.remove('on'),3200);bx();window.say&&say('¡Ganaste una insignia! 🏅')};
+rb2();bdn.onclick=()=>bp.classList.toggle('on');
+const QZ=[
+[['¿Cómo se describe la formación profesional en esta entrada?',['Como un proceso continuo','Como un trámite que termina al egresar','Como algo que no se puede mejorar']],['¿Qué actitud se considera importante mantener?',['Apertura al aprendizaje y a las opiniones de otros','Ignorar las opiniones ajenas','Trabajar siempre solo']]],
+[['¿Qué debe tener el uso de recursos digitales?',['Un propósito pedagógico','Solo fines de entretenimiento','Ningún criterio']],['Al elegir herramientas, ¿qué se debe considerar?',['Que sean accesibles y adecuadas a los objetivos','Que sean las más caras','Que sean las más nuevas']]],
+[['¿De quién depende el funcionamiento de una escuela?',['De la colaboración de sus integrantes','Solo del director','Solo de los docentes']],['¿Para qué sirve el diagnóstico de necesidades?',['Para identificar fortalezas y áreas de oportunidad','Para calificar a los alumnos','Para repartir castigos']]],
+[['Ante una dificultad de aprendizaje, ¿qué conviene hacer?',['Analizar varios factores antes de concluir','Pensar que el alumno no quiere aprender','Bajarle la calificación']],['¿Qué influye en la experiencia escolar?',['Desarrollo, motivación, emociones y contexto social','Solo la inteligencia','Solo el horario']]],
+[['¿Cuál NO es un elemento de la planeación didáctica?',['El horario del recreo','Los objetivos','Los recursos']],['¿Cómo debe ser una buena planeación?',['Flexible para ajustarse al grupo','Rígida e inmodificable','Igual para todos los grupos']]],
+[['¿Qué busca la inclusión educativa?',['Que todos participen y aprendan','Separar a quienes aprenden distinto','Tratar a todos exactamente igual']],['¿Quiénes deben colaborar para lograrla?',['Docentes, familias, directivos y profesionales de apoyo','Solo los docentes','Solo las familias']]],
+[['¿Quién destacó la interacción social y el lenguaje en el aprendizaje?',['Vygotsky','Skinner','Piaget']],['¿Con qué se relaciona el condicionamiento operante?',['Con las consecuencias de una conducta','Con las etapas del desarrollo','Con el lenguaje y la cultura']]],
+[['Además de contenidos, ¿qué desarrolla la educación?',['Capacidades personales y sociales','Solo la memoria','Solo la obediencia']],['¿Qué aporta la educación a las comunidades?',['Oportunidades para mejorar las condiciones de vida','Nada, solo afecta al individuo','Menos participación']]]
+];
+const TL='<h3>⏳ Línea de tiempo</h3><div class="tl"><div><small>1896 – 1980</small><b>Jean Piaget</b><p>Propone que el pensamiento se desarrolla por etapas: sensoriomotora, preoperacional, operaciones concretas y operaciones formales.</p></div><div><small>1896 – 1934</small><b>Lev Vygotsky</b><p>Destaca el contexto social y el lenguaje, y plantea la zona de desarrollo próximo.</p></div><div><small>1904 – 1990</small><b>B. F. Skinner</b><p>Estudia el condicionamiento operante: cómo el refuerzo modifica la conducta.</p></div></div>';
+const sh=a=>a.map(x=>[Math.random(),x]).sort((p,q)=>p[0]-q[0]).map(x=>x[1]);
+document.querySelectorAll('article').forEach((a,n)=>{
+ const q0=a.querySelector('.q');if(n==6)q0.insertAdjacentHTML('beforebegin',TL);
+ q0.insertAdjacentHTML('beforebegin',`<div class="qz"><h3>🎯 Mini quiz</h3>${QZ[n].map(([q,o],i)=>`<div class="qq"><p>${i+1}. ${q}</p><div class="op">${sh(o.map((t,k)=>[t,k==0])).map(([t,c])=>`<button data-c="${+c}">${t}</button>`).join('')}</div><div class="fb"></div></div>`).join('')}<div class="sc"></div></div>`);
+ const qs=[...a.querySelectorAll('.qq')],sc=a.querySelector('.sc');let ok=0,dn=0;
+ qs.forEach(qq=>qq.querySelectorAll('button').forEach(b=>b.onclick=()=>{
+  if(qq.dataset.d)return;qq.dataset.d=1;dn++;
+  qq.querySelectorAll('button').forEach(x=>{x.disabled=true;if(x.dataset.c==1)x.classList.add('ok')});
+  const g=b.dataset.c==1;if(g)ok++;else b.classList.add('no');
+  qq.querySelector('.fb').textContent=g?'¡Correcto! 🎉':'Casi. La respuesta correcta quedó en verde 💡';
+  if(dn==qs.length){sc.textContent=`Puntaje: ${ok}/${qs.length} ${'⭐'.repeat(ok)}`;SB.q[n]=Math.max(SB.q[n]||0,ok);sv();if(ok==qs.length)aw('per');if(Object.keys(SB.q).length>=8)aw('allq')}}));
+});
+const GL={'inclusión educativa':'Proceso que busca que todos los estudiantes participen y aprendan, eliminando lo que lo impide.','condicionamiento operante':'Aprendizaje en el que las consecuencias de una conducta (refuerzos o castigos) cambian la probabilidad de que se repita.','planeación didáctica':'Organización previa de objetivos, contenidos, actividades, recursos y evaluación para enseñar.','psicología educativa':'Disciplina que estudia cómo se enseña y se aprende, y cómo influyen el desarrollo, las emociones y el contexto.','liderazgo educativo':'Capacidad de guiar a la comunidad escolar hacia metas compartidas, promoviendo la participación.','gestión escolar':'Conjunto de acciones para organizar y coordinar el funcionamiento de una escuela.','pensamiento crítico':'Capacidad de analizar información y argumentos antes de formar un juicio o decidir.','retroalimentación':'Información que recibe el estudiante sobre su desempeño para saber qué puede mejorar.','diagnóstico':'Revisión inicial de necesidades, fortalezas y áreas de oportunidad de una escuela o grupo.','barreras':'Obstáculos del entorno, sociales o pedagógicos que limitan la participación y el aprendizaje.','zona de desarrollo próximo':'Distancia entre lo que una persona logra sola y lo que logra con ayuda de otros.'};
+const re=new RegExp('('+Object.keys(GL).join('|')+')','i');
+document.querySelectorAll('article').forEach(a=>{const dn=new Set();a.querySelectorAll('details p,details li,.tl p').forEach(el=>[...el.childNodes].forEach(nd=>{if(nd.nodeType!==3)return;const m=nd.nodeValue.match(re);if(!m)return;const k=m[0].toLowerCase();if(dn.has(k))return;dn.add(k);const mid=nd.splitText(m.index);mid.splitText(m[0].length);const s=document.createElement('span');s.className='gl';s.tabIndex=0;s.dataset.d=GL[k];s.textContent=m[0];mid.replaceWith(s)}))});
+const shw=el=>{tp.textContent=el.dataset.d;tp.classList.add('on');const r=el.getBoundingClientRect(),w=tp.offsetWidth,h=tp.offsetHeight;tp.style.left=Math.max(8,Math.min(innerWidth-w-8,r.left+r.width/2-w/2))+'px';tp.style.top=(r.top-h-8<8?r.bottom+8:r.top-h-8)+'px';aw('gl')};
+const tg=e=>{const g=e.target.closest('.gl');g?shw(g):tp.classList.remove('on')};
+document.addEventListener('mouseover',tg);document.addEventListener('click',tg);document.addEventListener('focusin',tg);
+const to=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('in')),{threshold:.3});document.querySelectorAll('.tl').forEach(t=>to.observe(t));
+const seen=new Set(),so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){seen.add(e.target.id);if(seen.size>=8)aw('cur')}}),{threshold:.1});document.querySelectorAll('article').forEach(a=>so.observe(a));
+const chk=()=>{if(Object.values(S).reduce((s,x)=>s+(x.c||[]).length,0)>=8)aw('com');if(Object.values(S).some(x=>(x.m||[]).length))aw('voz');if(by.classList.contains('show'))aw('fin')};setInterval(chk,1500);
+const TH={'':['#d9632b','#f2b04a','#b5481b','#c2512f','#8a4b2a','#e8893a'],spring:['#f4a3c0','#8fcf6a','#e86d9b','#b9e08a','#6bbf59','#f7c6d9'],night:['#8ab4ff','#c9a7ff','#7fe0d0','#ffd36e','#a0a8ff','#ffffff']};
+const setT=(t,u)=>{t?document.documentElement.dataset.t=t:delete document.documentElement.dataset.t;document.querySelectorAll('#th button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));if(window.LC){LC.splice(0,6,...TH[t]);LV.forEach(l=>l.c=LC[Math.random()*6|0])}try{localStorage.setItem('aat',t)}catch(e){}if(u)aw('tem')};
+document.querySelectorAll('#th button').forEach(b=>b.onclick=()=>setT(b.dataset.t,1));
+let t0='';try{t0=localStorage.getItem('aat')||''}catch(e){}setT(TH[t0]?t0:'');
+setTimeout(()=>{if(window.say)say('¡Hola! Soy Atenea, tu guía en Aula Abierta 🦉')},3800);
+const SAT=[7,2,1,4,5,3,6],LB={0:'Mi aprendizaje',1:'Tecnología',2:'Gestión',3:'Psicología',4:'Planeación',5:'Inclusión',6:'Teorías',7:'Sociedad'};
+const SUM={0:'Reflexión final: reúne lo aprendido en todos los temas y las competencias que seguimos desarrollando.',1:'La tecnología apoya el aprendizaje cuando se usa con propósito pedagógico y de forma accesible.',2:'La gestión escolar organiza personas, recursos y metas para que la escuela funcione mejor.',3:'La psicología educativa ayuda a comprender emociones, desarrollo y contexto antes de juzgar a un estudiante.',4:'La planeación didáctica organiza objetivos, actividades, recursos y evaluación.',5:'La inclusión busca que todos participen y aprendan eliminando barreras.',6:'Piaget, Vygotsky y Skinner explican de maneras distintas cómo se aprende.',7:'La educación desarrolla capacidades personales y sociales y mejora a las comunidades.'};
+const ED=[[7,2,'La educación en la sociedad se concreta en escuelas bien gestionadas.'],[2,1,'La gestión decide qué recursos tecnológicos se usan y cómo.'],[1,4,'La tecnología aporta recursos y actividades a la planeación.'],[4,5,'Planear con enfoque inclusivo elimina barreras desde el diseño.'],[5,3,'Entender emociones y contexto ayuda a incluir a todos.'],[3,6,'Las teorías dan base para comprender lo psicológico del aprendizaje.'],[4,6,'Las teorías orientan las estrategias que se planean.']];
+SAT.forEach(n=>ED.push([0,n,'Se integra en la reflexión final de lo aprendido.']));
+const pos={0:[300,220]};SAT.forEach((n,k)=>{const a=(-90+k*360/7)*Math.PI/180;pos[n]=[300+225*Math.cos(a),220+160*Math.sin(a)]});
+by.insertAdjacentHTML('beforebegin',`<section id="map"><div class="mapc"><h2>🗺️ Mapa conceptual</h2><p>Explora cómo se conectan los temas del blog.</p><svg viewBox="0 0 600 440" role="img" aria-label="Mapa conceptual de las entradas del blog">${ED.map(([a,b])=>`<line class="ed" data-a="${a}" data-b="${b}" x1="${pos[a][0]}" y1="${pos[a][1]}" x2="${pos[b][0]}" y2="${pos[b][1]}"/>`).join('')}${Object.keys(pos).map((n,i)=>`<g class="nd" data-i="${n}" tabindex="0" style="animation-delay:${i*.12}s,${-i*.4}s"><circle cx="${pos[n][0]}" cy="${pos[n][1]}" r="${n==0?42:34}"/><text class="em" x="${pos[n][0]}" y="${pos[n][1]+9}" text-anchor="middle">${IC[n]}</text><text class="lb" x="${pos[n][0]}" y="${pos[n][1]+(n==0?60:52)}" text-anchor="middle">${LB[n]}</text></g>`).join('')}</svg><div id="mi"><b>👆 Toca un nodo</b> para ver cómo se conecta con los demás temas.</div></div></section>`);
+nav.insertAdjacentHTML('beforeend','<a href="#map">🗺️ Mapa</a>');
+const mc=document.querySelector('.mapc'),mi=document.getElementById('mi');
+const sel=n=>{n=+n;mc.classList.add('sa');const rel=new Set();
+ mc.querySelectorAll('.ed').forEach(l=>{const a=+l.dataset.a,b=+l.dataset.b,h=a==n||b==n;l.classList.toggle('hl',h);if(h)rel.add(a==n?b:a)});
+ mc.querySelectorAll('.nd').forEach(g=>{const i=+g.dataset.i;g.classList.toggle('on',i==n);g.classList.toggle('rel',rel.has(i))});
+ mi.innerHTML=`<h3>${IC[n]} ${P[n].t}</h3><p>${SUM[n]}</p><b>Conexiones:</b><ul>${ED.filter(e=>e[0]==n||e[1]==n).map(([a,b,r])=>{const o=a==n?b:a;return `<li><button class="chip" data-i="${o}">${IC[o]} ${LB[o]}</button>${r}</li>`}).join('')}</ul><button class="send" data-go="${n}">Leer entrada →</button>`};
+mc.addEventListener('click',e=>{const g=e.target.closest('.nd'),c=e.target.closest('.chip'),gt=e.target.closest('[data-go]');if(g)sel(g.dataset.i);else if(c)sel(c.dataset.i);else if(gt)document.getElementById('e'+gt.dataset.go).scrollIntoView({behavior:'smooth'})});
+mc.addEventListener('keydown',e=>{const g=e.target.closest('.nd');if(e.key=='Enter'&&g)sel(g.dataset.i)});
+new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){mc.classList.add('in');o.disconnect()}}),{threshold:.2}).observe(mc);
+document.body.insertAdjacentHTML('beforeend','<div id="owl" title="Atenea"><div id="ob"></div><svg viewBox="0 0 100 110" role="img" aria-label="Búho Atenea"><g class="wl"><ellipse cx="14" cy="70" rx="10" ry="24" fill="#6e3a20"/></g><g class="wr"><ellipse cx="86" cy="70" rx="10" ry="24" fill="#6e3a20"/></g><ellipse cx="50" cy="65" rx="34" ry="40" fill="#8a4b2a"/><ellipse cx="50" cy="76" rx="22" ry="26" fill="#f2c58a"/><path d="M22 34L16 8L40 26zM78 34L84 8L60 26z" fill="#8a4b2a"/><circle cx="36" cy="44" r="15" fill="#fff"/><circle cx="64" cy="44" r="15" fill="#fff"/><circle class="pp" cx="36" cy="44" r="7" fill="#2b1a10"/><circle class="pp" cx="64" cy="44" r="7" fill="#2b1a10"/><ellipse class="lid" cx="36" cy="44" rx="15" ry="15" fill="#8a4b2a"/><ellipse class="lid" cx="64" cy="44" rx="15" ry="15" fill="#8a4b2a"/><path d="M44 54L56 54L50 66z" fill="#f2b04a"/><path d="M38 102h8M54 102h8" stroke="#f2b04a" stroke-width="5" stroke-linecap="round"/><path d="M36 82q6 6 12 0M52 82q6 6 12 0M44 90q6 6 12 0" stroke="#d9a15a" stroke-width="2" fill="none"/></svg></div>');
+const ow=document.getElementById('owl'),ob=document.getElementById('ob'),TIPS=['Toca los términos subrayados para ver su definición 📖','Contesta los quizzes para ganar insignias 🏅','Cambia el tema arriba a la derecha 🎨','Toca el fondo y lanza una lluvia de hojas 🍁','Prueba el mapa conceptual: ¡las líneas se iluminan! 🗺️'];let ot,ti=0;
+window.say=t=>{ob.textContent=t;ob.classList.add('on');ow.classList.remove('hop');void ow.offsetWidth;ow.classList.add('hop');clearTimeout(ot);ot=setTimeout(()=>ob.classList.remove('on'),4800)};
+ow.onclick=()=>say(TIPS[ti++%TIPS.length]);
+addEventListener('pointermove',e=>{const r=ow.getBoundingClientRect(),dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height*.4),d=Math.hypot(dx,dy)||1;ow.querySelectorAll('.pp').forEach(p=>p.style.translate=`${dx/d*5}px ${dy/d*5}px`)});
+document.addEventListener('click',e=>{const b=e.target.closest('.op button');if(b)say(b.classList.contains('ok')?'¡Eso es! 🎉':'¡Casi! Tú puedes 💪')});
+const mk2=[[.25,'¡Vas muy bien! Ya llevas un cuarto del blog 📖'],[.5,'¡Mitad del camino! Prueba un quiz 🎯'],[.75,'¡Casi terminas! Falta poco 🍂']],sd=new Set();
+addEventListener('scroll',()=>{const h=document.documentElement,p=h.scrollTop/Math.max(1,h.scrollHeight-h.clientHeight);mk2.forEach(([v,t])=>{if(p>=v&&!sd.has(v)){sd.add(v);say(t)}})});
+new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&say('¡Gracias por leer con nosotros! 💛')),{threshold:.5}).observe(by);
+const fm=document.createElement('button');fm.id='fm';fm.textContent='🧘 Enfoque';fm.title='Modo enfoque: apaga las animaciones, el fondo y al búho';document.body.appendChild(fm);
+const setF=on=>{document.documentElement.toggleAttribute('data-f',on);fm.classList.toggle('on',on);fm.setAttribute('aria-pressed',on);try{localStorage.setItem('aaf',on?'1':'')}catch(e){}};
+fm.onclick=()=>setF(!document.documentElement.hasAttribute('data-f'));
+let f0='';try{f0=localStorage.getItem('aaf')}catch(e){}setF(!!f0);
+</script>
+</body>
+</html>
